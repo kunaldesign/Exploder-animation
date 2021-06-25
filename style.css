@@ -1,0 +1,3032 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fff;
+  --delay1: 5;
+  --delay2: 5;
+  --delay3: 5;
+  --cubic1: 0.5;
+  --cubic2: 1;
+  --cubic3: 0.5;
+  --cubic4: 1.25;
+  --offset: 0.25;
+  --hue: 0deg;
+  --size: 5px;
+}
+body #controls {
+  position: absolute;
+  width: 100%;
+  bottom: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 0px;
+  padding: 20px 40px;
+  box-sizing: border-box;
+  max-width: 350px;
+  z-index: 10;
+}
+@media (max-height: 700px) {
+  body #controls {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-width: 100%;
+  }
+}
+@media (min-width: 768px) and (min-height: 700px) {
+  body #controls {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    max-width: 500px;
+    height: 175px;
+  }
+  body #controls .control:nth-of-type(9) {
+    grid-area: 5/1/6/3;
+    padding: 0;
+  }
+  body #controls .control:nth-of-type(10) {
+    grid-area: 5/3/6/5;
+    padding: 0;
+  }
+}
+body #controls .control {
+  padding: 10px 0;
+}
+body #controls .control:hover label {
+  color: #000;
+}
+body #controls .control label {
+  transition: 0.3s ease-in-out;
+  color: #666;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  font-family: Futura;
+  text-transform: uppercase;
+  display: block;
+}
+body #controls .control:nth-of-type(1) input[type=range]::-webkit-slider-thumb {
+  background: #40e0d0;
+}
+body #controls .control:nth-of-type(2) input[type=range]::-webkit-slider-thumb {
+  background: #40e0d0;
+}
+body #controls .control:nth-of-type(3) input[type=range]::-webkit-slider-thumb {
+  background: #40e0d0;
+}
+body #controls .control:nth-of-type(4) input[type=range]::-webkit-slider-thumb {
+  background: #40e0d0;
+}
+body #controls .control:nth-of-type(5) input[type=range]::-webkit-slider-thumb {
+  background: #ff8c00;
+}
+body #controls .control:nth-of-type(6) input[type=range]::-webkit-slider-thumb {
+  background: #ff8c00;
+}
+body #controls .control:nth-of-type(7) input[type=range]::-webkit-slider-thumb {
+  background: #ff8c00;
+}
+body #controls .control:nth-of-type(8) input[type=range]::-webkit-slider-thumb {
+  background: #ff8c00;
+}
+body #controls input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+  width: 100%;
+}
+body #controls input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+body #controls input[type=range]:focus {
+  outline: none;
+}
+body #controls input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: -6px;
+  background: #ff0080;
+  box-shadow: 0 0 0 3px #fff, inset 0 0 20px -20px rgba(0, 0, 0, 0.25);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+body #controls input[type=range]::-webkit-slider-thumb:active {
+  box-shadow: 0 0 0 3px #fff, inset 0 0 20px 20px rgba(0, 0, 0, 0.25);
+}
+body #controls input[type=range]::-webkit-slider-runnable-track,
+body #controls input[type=range]:focus::-webkit-slider-runnable-track {
+  height: 2px;
+  cursor: pointer;
+  background: #ccc;
+  border-radius: 25px;
+  outline: none;
+}
+body #wrap {
+  width: 0px;
+  height: 0px;
+  position: relative;
+  transform: translateY(-75px);
+  filter: hue-rotate(var(--hue));
+}
+body #wrap:before, body #wrap:after {
+  content: "";
+  border-radius: 100%;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: calc(50% - 250px);
+  left: calc(50% - 250px);
+  background: linear-gradient(to right, #40e0d0, #ff8c00, #ff0080);
+  -webkit-animation: rotate 6s linear infinite;
+          animation: rotate 6s linear infinite;
+  box-shadow: 0 0 0 5px #fff, 0 0 0 7px #40e0d0, 0 0 80px -40px #000;
+  z-index: 10;
+  mix-blend-mode: darken;
+}
+@-webkit-keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap:after {
+  background: #000;
+  z-index: 8;
+  mix-blend-mode: none;
+}
+body #wrap .circle {
+  z-index: 9;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+}
+body #wrap .circle:nth-of-type(3) {
+  transform-origin: 50% 50%;
+  transform: rotate(360deg) translateY(calc(14.04px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(3) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.15s * var(--delay3));
+          animation-delay: calc(-0.15s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(3) .inner:before, body #wrap .circle:nth-of-type(3) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.05s * var(--delay1));
+          animation-delay: calc(-0.05s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@-webkit-keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@-webkit-keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(3) .inner:after {
+  -webkit-animation-delay: calc(-2.15s * var(--delay2));
+          animation-delay: calc(-2.15s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@-webkit-keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(4) {
+  transform-origin: 50% 50%;
+  transform: rotate(480deg) translateY(calc(14.04px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(4) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.15s * var(--delay3));
+          animation-delay: calc(-0.15s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(4) .inner:before, body #wrap .circle:nth-of-type(4) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.0666666667s * var(--delay1));
+          animation-delay: calc(-0.0666666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(4) .inner:after {
+  -webkit-animation-delay: calc(-2.2s * var(--delay2));
+          animation-delay: calc(-2.2s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(5) {
+  transform-origin: 50% 50%;
+  transform: rotate(600deg) translateY(calc(14.04px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(5) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.15s * var(--delay3));
+          animation-delay: calc(-0.15s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(5) .inner:before, body #wrap .circle:nth-of-type(5) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.0833333333s * var(--delay1));
+          animation-delay: calc(-0.0833333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(5) .inner:after {
+  -webkit-animation-delay: calc(-2.25s * var(--delay2));
+          animation-delay: calc(-2.25s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(6) {
+  transform-origin: 50% 50%;
+  transform: rotate(720deg) translateY(calc(14.04px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(6) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.15s * var(--delay3));
+          animation-delay: calc(-0.15s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(6) .inner:before, body #wrap .circle:nth-of-type(6) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.1s * var(--delay1));
+          animation-delay: calc(-0.1s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(6) .inner:after {
+  -webkit-animation-delay: calc(-2.3s * var(--delay2));
+          animation-delay: calc(-2.3s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(6) {
+  transform-origin: 50% 50%;
+  transform: rotate(360deg) translateY(calc(27.36px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(6) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.3s * var(--delay3));
+          animation-delay: calc(-0.3s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(6) .inner:before, body #wrap .circle:nth-of-type(6) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.1s * var(--delay1));
+          animation-delay: calc(-0.1s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(6) .inner:after {
+  -webkit-animation-delay: calc(-2.3s * var(--delay2));
+          animation-delay: calc(-2.3s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(7) {
+  transform-origin: 50% 50%;
+  transform: rotate(420deg) translateY(calc(27.36px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(7) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.3s * var(--delay3));
+          animation-delay: calc(-0.3s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(7) .inner:before, body #wrap .circle:nth-of-type(7) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.1166666667s * var(--delay1));
+          animation-delay: calc(-0.1166666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(7) .inner:after {
+  -webkit-animation-delay: calc(-2.35s * var(--delay2));
+          animation-delay: calc(-2.35s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(8) {
+  transform-origin: 50% 50%;
+  transform: rotate(480deg) translateY(calc(27.36px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(8) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.3s * var(--delay3));
+          animation-delay: calc(-0.3s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(8) .inner:before, body #wrap .circle:nth-of-type(8) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.1333333333s * var(--delay1));
+          animation-delay: calc(-0.1333333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(8) .inner:after {
+  -webkit-animation-delay: calc(-2.4s * var(--delay2));
+          animation-delay: calc(-2.4s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(9) {
+  transform-origin: 50% 50%;
+  transform: rotate(540deg) translateY(calc(27.36px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(9) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.3s * var(--delay3));
+          animation-delay: calc(-0.3s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(9) .inner:before, body #wrap .circle:nth-of-type(9) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.15s * var(--delay1));
+          animation-delay: calc(-0.15s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(9) .inner:after {
+  -webkit-animation-delay: calc(-2.45s * var(--delay2));
+          animation-delay: calc(-2.45s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(10) {
+  transform-origin: 50% 50%;
+  transform: rotate(600deg) translateY(calc(27.36px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(10) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.3s * var(--delay3));
+          animation-delay: calc(-0.3s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(10) .inner:before, body #wrap .circle:nth-of-type(10) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.1666666667s * var(--delay1));
+          animation-delay: calc(-0.1666666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(10) .inner:after {
+  -webkit-animation-delay: calc(-2.5s * var(--delay2));
+          animation-delay: calc(-2.5s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(11) {
+  transform-origin: 50% 50%;
+  transform: rotate(660deg) translateY(calc(27.36px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(11) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.3s * var(--delay3));
+          animation-delay: calc(-0.3s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(11) .inner:before, body #wrap .circle:nth-of-type(11) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.1833333333s * var(--delay1));
+          animation-delay: calc(-0.1833333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(11) .inner:after {
+  -webkit-animation-delay: calc(-2.55s * var(--delay2));
+          animation-delay: calc(-2.55s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(12) {
+  transform-origin: 50% 50%;
+  transform: rotate(720deg) translateY(calc(27.36px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(12) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.3s * var(--delay3));
+          animation-delay: calc(-0.3s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(12) .inner:before, body #wrap .circle:nth-of-type(12) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.2s * var(--delay1));
+          animation-delay: calc(-0.2s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(12) .inner:after {
+  -webkit-animation-delay: calc(-2.6s * var(--delay2));
+          animation-delay: calc(-2.6s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(12) {
+  transform-origin: 50% 50%;
+  transform: rotate(360deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(12) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(12) .inner:before, body #wrap .circle:nth-of-type(12) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.2s * var(--delay1));
+          animation-delay: calc(-0.2s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(12) .inner:after {
+  -webkit-animation-delay: calc(-2.6s * var(--delay2));
+          animation-delay: calc(-2.6s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(13) {
+  transform-origin: 50% 50%;
+  transform: rotate(390deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(13) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(13) .inner:before, body #wrap .circle:nth-of-type(13) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.2166666667s * var(--delay1));
+          animation-delay: calc(-0.2166666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(13) .inner:after {
+  -webkit-animation-delay: calc(-2.65s * var(--delay2));
+          animation-delay: calc(-2.65s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(14) {
+  transform-origin: 50% 50%;
+  transform: rotate(420deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(14) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(14) .inner:before, body #wrap .circle:nth-of-type(14) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.2333333333s * var(--delay1));
+          animation-delay: calc(-0.2333333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(14) .inner:after {
+  -webkit-animation-delay: calc(-2.7s * var(--delay2));
+          animation-delay: calc(-2.7s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(15) {
+  transform-origin: 50% 50%;
+  transform: rotate(450deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(15) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(15) .inner:before, body #wrap .circle:nth-of-type(15) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.25s * var(--delay1));
+          animation-delay: calc(-0.25s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(15) .inner:after {
+  -webkit-animation-delay: calc(-2.75s * var(--delay2));
+          animation-delay: calc(-2.75s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(16) {
+  transform-origin: 50% 50%;
+  transform: rotate(480deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(16) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(16) .inner:before, body #wrap .circle:nth-of-type(16) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.2666666667s * var(--delay1));
+          animation-delay: calc(-0.2666666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(16) .inner:after {
+  -webkit-animation-delay: calc(-2.8s * var(--delay2));
+          animation-delay: calc(-2.8s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(17) {
+  transform-origin: 50% 50%;
+  transform: rotate(510deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(17) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(17) .inner:before, body #wrap .circle:nth-of-type(17) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.2833333333s * var(--delay1));
+          animation-delay: calc(-0.2833333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(17) .inner:after {
+  -webkit-animation-delay: calc(-2.85s * var(--delay2));
+          animation-delay: calc(-2.85s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(18) {
+  transform-origin: 50% 50%;
+  transform: rotate(540deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(18) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(18) .inner:before, body #wrap .circle:nth-of-type(18) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.3s * var(--delay1));
+          animation-delay: calc(-0.3s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(18) .inner:after {
+  -webkit-animation-delay: calc(-2.9s * var(--delay2));
+          animation-delay: calc(-2.9s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(19) {
+  transform-origin: 50% 50%;
+  transform: rotate(570deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(19) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(19) .inner:before, body #wrap .circle:nth-of-type(19) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.3166666667s * var(--delay1));
+          animation-delay: calc(-0.3166666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(19) .inner:after {
+  -webkit-animation-delay: calc(-2.95s * var(--delay2));
+          animation-delay: calc(-2.95s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(20) {
+  transform-origin: 50% 50%;
+  transform: rotate(600deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(20) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(20) .inner:before, body #wrap .circle:nth-of-type(20) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.3333333333s * var(--delay1));
+          animation-delay: calc(-0.3333333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(20) .inner:after {
+  -webkit-animation-delay: calc(-3s * var(--delay2));
+          animation-delay: calc(-3s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(21) {
+  transform-origin: 50% 50%;
+  transform: rotate(630deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(21) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(21) .inner:before, body #wrap .circle:nth-of-type(21) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.35s * var(--delay1));
+          animation-delay: calc(-0.35s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(21) .inner:after {
+  -webkit-animation-delay: calc(-3.05s * var(--delay2));
+          animation-delay: calc(-3.05s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(22) {
+  transform-origin: 50% 50%;
+  transform: rotate(660deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(22) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(22) .inner:before, body #wrap .circle:nth-of-type(22) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.3666666667s * var(--delay1));
+          animation-delay: calc(-0.3666666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(22) .inner:after {
+  -webkit-animation-delay: calc(-3.1s * var(--delay2));
+          animation-delay: calc(-3.1s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(23) {
+  transform-origin: 50% 50%;
+  transform: rotate(690deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(23) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(23) .inner:before, body #wrap .circle:nth-of-type(23) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.3833333333s * var(--delay1));
+          animation-delay: calc(-0.3833333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(23) .inner:after {
+  -webkit-animation-delay: calc(-3.15s * var(--delay2));
+          animation-delay: calc(-3.15s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(24) {
+  transform-origin: 50% 50%;
+  transform: rotate(720deg) translateY(calc(51.84px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(24) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-0.6s * var(--delay3));
+          animation-delay: calc(-0.6s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(24) .inner:before, body #wrap .circle:nth-of-type(24) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.4s * var(--delay1));
+          animation-delay: calc(-0.4s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(24) .inner:after {
+  -webkit-animation-delay: calc(-3.2s * var(--delay2));
+          animation-delay: calc(-3.2s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(24) {
+  transform-origin: 50% 50%;
+  transform: rotate(360deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(24) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(24) .inner:before, body #wrap .circle:nth-of-type(24) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.4s * var(--delay1));
+          animation-delay: calc(-0.4s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(24) .inner:after {
+  -webkit-animation-delay: calc(-3.2s * var(--delay2));
+          animation-delay: calc(-3.2s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(25) {
+  transform-origin: 50% 50%;
+  transform: rotate(375deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(25) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(25) .inner:before, body #wrap .circle:nth-of-type(25) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.4166666667s * var(--delay1));
+          animation-delay: calc(-0.4166666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(25) .inner:after {
+  -webkit-animation-delay: calc(-3.25s * var(--delay2));
+          animation-delay: calc(-3.25s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(26) {
+  transform-origin: 50% 50%;
+  transform: rotate(390deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(26) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(26) .inner:before, body #wrap .circle:nth-of-type(26) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.4333333333s * var(--delay1));
+          animation-delay: calc(-0.4333333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(26) .inner:after {
+  -webkit-animation-delay: calc(-3.3s * var(--delay2));
+          animation-delay: calc(-3.3s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(27) {
+  transform-origin: 50% 50%;
+  transform: rotate(405deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(27) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(27) .inner:before, body #wrap .circle:nth-of-type(27) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.45s * var(--delay1));
+          animation-delay: calc(-0.45s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(27) .inner:after {
+  -webkit-animation-delay: calc(-3.35s * var(--delay2));
+          animation-delay: calc(-3.35s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(28) {
+  transform-origin: 50% 50%;
+  transform: rotate(420deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(28) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(28) .inner:before, body #wrap .circle:nth-of-type(28) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.4666666667s * var(--delay1));
+          animation-delay: calc(-0.4666666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(28) .inner:after {
+  -webkit-animation-delay: calc(-3.4s * var(--delay2));
+          animation-delay: calc(-3.4s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(29) {
+  transform-origin: 50% 50%;
+  transform: rotate(435deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(29) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(29) .inner:before, body #wrap .circle:nth-of-type(29) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.4833333333s * var(--delay1));
+          animation-delay: calc(-0.4833333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(29) .inner:after {
+  -webkit-animation-delay: calc(-3.45s * var(--delay2));
+          animation-delay: calc(-3.45s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(30) {
+  transform-origin: 50% 50%;
+  transform: rotate(450deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(30) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(30) .inner:before, body #wrap .circle:nth-of-type(30) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.5s * var(--delay1));
+          animation-delay: calc(-0.5s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(30) .inner:after {
+  -webkit-animation-delay: calc(-3.5s * var(--delay2));
+          animation-delay: calc(-3.5s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(31) {
+  transform-origin: 50% 50%;
+  transform: rotate(465deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(31) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(31) .inner:before, body #wrap .circle:nth-of-type(31) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.5166666667s * var(--delay1));
+          animation-delay: calc(-0.5166666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(31) .inner:after {
+  -webkit-animation-delay: calc(-3.55s * var(--delay2));
+          animation-delay: calc(-3.55s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(32) {
+  transform-origin: 50% 50%;
+  transform: rotate(480deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(32) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(32) .inner:before, body #wrap .circle:nth-of-type(32) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.5333333333s * var(--delay1));
+          animation-delay: calc(-0.5333333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(32) .inner:after {
+  -webkit-animation-delay: calc(-3.6s * var(--delay2));
+          animation-delay: calc(-3.6s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(33) {
+  transform-origin: 50% 50%;
+  transform: rotate(495deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(33) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(33) .inner:before, body #wrap .circle:nth-of-type(33) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.55s * var(--delay1));
+          animation-delay: calc(-0.55s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(33) .inner:after {
+  -webkit-animation-delay: calc(-3.65s * var(--delay2));
+          animation-delay: calc(-3.65s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(34) {
+  transform-origin: 50% 50%;
+  transform: rotate(510deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(34) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(34) .inner:before, body #wrap .circle:nth-of-type(34) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.5666666667s * var(--delay1));
+          animation-delay: calc(-0.5666666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(34) .inner:after {
+  -webkit-animation-delay: calc(-3.7s * var(--delay2));
+          animation-delay: calc(-3.7s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(35) {
+  transform-origin: 50% 50%;
+  transform: rotate(525deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(35) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(35) .inner:before, body #wrap .circle:nth-of-type(35) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.5833333333s * var(--delay1));
+          animation-delay: calc(-0.5833333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(35) .inner:after {
+  -webkit-animation-delay: calc(-3.75s * var(--delay2));
+          animation-delay: calc(-3.75s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(36) {
+  transform-origin: 50% 50%;
+  transform: rotate(540deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(36) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(36) .inner:before, body #wrap .circle:nth-of-type(36) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.6s * var(--delay1));
+          animation-delay: calc(-0.6s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(36) .inner:after {
+  -webkit-animation-delay: calc(-3.8s * var(--delay2));
+          animation-delay: calc(-3.8s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(37) {
+  transform-origin: 50% 50%;
+  transform: rotate(555deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(37) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(37) .inner:before, body #wrap .circle:nth-of-type(37) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.6166666667s * var(--delay1));
+          animation-delay: calc(-0.6166666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(37) .inner:after {
+  -webkit-animation-delay: calc(-3.85s * var(--delay2));
+          animation-delay: calc(-3.85s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(38) {
+  transform-origin: 50% 50%;
+  transform: rotate(570deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(38) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(38) .inner:before, body #wrap .circle:nth-of-type(38) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.6333333333s * var(--delay1));
+          animation-delay: calc(-0.6333333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(38) .inner:after {
+  -webkit-animation-delay: calc(-3.9s * var(--delay2));
+          animation-delay: calc(-3.9s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(39) {
+  transform-origin: 50% 50%;
+  transform: rotate(585deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(39) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(39) .inner:before, body #wrap .circle:nth-of-type(39) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.65s * var(--delay1));
+          animation-delay: calc(-0.65s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(39) .inner:after {
+  -webkit-animation-delay: calc(-3.95s * var(--delay2));
+          animation-delay: calc(-3.95s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(40) {
+  transform-origin: 50% 50%;
+  transform: rotate(600deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(40) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(40) .inner:before, body #wrap .circle:nth-of-type(40) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.6666666667s * var(--delay1));
+          animation-delay: calc(-0.6666666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(40) .inner:after {
+  -webkit-animation-delay: calc(-4s * var(--delay2));
+          animation-delay: calc(-4s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(41) {
+  transform-origin: 50% 50%;
+  transform: rotate(615deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(41) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(41) .inner:before, body #wrap .circle:nth-of-type(41) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.6833333333s * var(--delay1));
+          animation-delay: calc(-0.6833333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(41) .inner:after {
+  -webkit-animation-delay: calc(-4.05s * var(--delay2));
+          animation-delay: calc(-4.05s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(42) {
+  transform-origin: 50% 50%;
+  transform: rotate(630deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(42) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(42) .inner:before, body #wrap .circle:nth-of-type(42) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.7s * var(--delay1));
+          animation-delay: calc(-0.7s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(42) .inner:after {
+  -webkit-animation-delay: calc(-4.1s * var(--delay2));
+          animation-delay: calc(-4.1s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(43) {
+  transform-origin: 50% 50%;
+  transform: rotate(645deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(43) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(43) .inner:before, body #wrap .circle:nth-of-type(43) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.7166666667s * var(--delay1));
+          animation-delay: calc(-0.7166666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(43) .inner:after {
+  -webkit-animation-delay: calc(-4.15s * var(--delay2));
+          animation-delay: calc(-4.15s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(44) {
+  transform-origin: 50% 50%;
+  transform: rotate(660deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(44) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(44) .inner:before, body #wrap .circle:nth-of-type(44) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.7333333333s * var(--delay1));
+          animation-delay: calc(-0.7333333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(44) .inner:after {
+  -webkit-animation-delay: calc(-4.2s * var(--delay2));
+          animation-delay: calc(-4.2s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(45) {
+  transform-origin: 50% 50%;
+  transform: rotate(675deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(45) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(45) .inner:before, body #wrap .circle:nth-of-type(45) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.75s * var(--delay1));
+          animation-delay: calc(-0.75s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(45) .inner:after {
+  -webkit-animation-delay: calc(-4.25s * var(--delay2));
+          animation-delay: calc(-4.25s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(46) {
+  transform-origin: 50% 50%;
+  transform: rotate(690deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(46) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(46) .inner:before, body #wrap .circle:nth-of-type(46) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.7666666667s * var(--delay1));
+          animation-delay: calc(-0.7666666667s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(46) .inner:after {
+  -webkit-animation-delay: calc(-4.3s * var(--delay2));
+          animation-delay: calc(-4.3s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(47) {
+  transform-origin: 50% 50%;
+  transform: rotate(705deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(47) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(47) .inner:before, body #wrap .circle:nth-of-type(47) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.7833333333s * var(--delay1));
+          animation-delay: calc(-0.7833333333s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(47) .inner:after {
+  -webkit-animation-delay: calc(-4.35s * var(--delay2));
+          animation-delay: calc(-4.35s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+body #wrap .circle:nth-of-type(48) {
+  transform-origin: 50% 50%;
+  transform: rotate(720deg) translateY(calc(92.16px * var(--offset)));
+}
+body #wrap .circle:nth-of-type(48) .inner {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  left: calc(50% - 10px);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+          animation: bounceIn 3s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite alternate;
+  -webkit-animation-delay: calc(-1.2s * var(--delay3));
+          animation-delay: calc(-1.2s * var(--delay3));
+}
+body #wrap .circle:nth-of-type(48) .inner:before, body #wrap .circle:nth-of-type(48) .inner:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - (var(--size) / 2));
+  left: calc(50% - (var(--size) / 2));
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0px #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+  -webkit-animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+          animation: bounce2 4s cubic-bezier(var(--cubic1), var(--cubic2), var(--cubic3), var(--cubic4)) infinite, shadow 2s ease-in-out infinite;
+  -webkit-animation-delay: calc(-0.8s * var(--delay1));
+          animation-delay: calc(-0.8s * var(--delay1));
+  transform-origin: 50% 25px;
+}
+@keyframes shadow {
+  to {
+    box-shadow: 0 100px 0 -10px #fff, 0px -100px 0 -10px #fff, 100px 0 0 -10px #fff, -100px 0 0 -10px #fff;
+  }
+}
+@keyframes bounce2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body #wrap .circle:nth-of-type(48) .inner:after {
+  -webkit-animation-delay: calc(-4.4s * var(--delay2));
+          animation-delay: calc(-4.4s * var(--delay2));
+  transform-origin: 50% -25px;
+}
+@keyframes bounceIn {
+  to {
+    transform: translateY(50px);
+  }
+}/*# sourceMappingURL=style.css.map */
